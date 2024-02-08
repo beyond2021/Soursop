@@ -59,6 +59,8 @@ extension TwitImagePicker {
             guard let image = info[.originalImage] as? UIImage else { return }
             // pass our image to the picker
             parent.selectedImage = image
+            // MARK: Save Image to Photo Album
+           // UIImageWriteToSavedPhotosAlbum(image, nil, nil, nil)
             // Dissmiss the Picker
             parent.presentationMode.wrappedValue.dismiss()
         }

@@ -3,27 +3,30 @@
 //  Soursop
 //
 //  Created by KEEVIN MITCHELL on 6/21/22.
-//
+// PARENT VIEW FOR USERLISTVIEW
+// CONTAINS  SEARCHBAR, USERLISTVIEW AND POSTGRIDVIEW
 
 import SwiftUI
 
 struct SearchView: View {
+    @ObservedObject var searchViewModel = SearchViewModel()
     
-    @State var serachText = ""
+    @State var searchText = ""
     // switching state variable
     @State var inSearchMode = true
    
     var body: some View {
         ScrollView {
             // Searchbar
-            SearchBar(text: $serachText, isEditing: $inSearchMode)
+            SearchBar(text: $searchText, isEditing: $inSearchMode)
                 .padding()
         // Switching Views
             ZStack {
                 if inSearchMode {
-                    UserListView()
+                    // MARK: Passing the vm to the UserListView
+                    UserListView(searchViewModel: searchViewModel, searchText: $searchText)
                 } else {
-                    PostGridView()
+                    PostGridView(config: .explore) // MARK: REUSABLE
                 }
             }
             
